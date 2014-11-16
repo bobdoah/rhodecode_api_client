@@ -2,6 +2,8 @@ import json
 import urllib2
 import uuid
 
+from .utils import normalised_url
+
 class RhodecodeClientError(Exception):
     pass
 
@@ -17,7 +19,7 @@ class RhodecodeClient(object):
         return self._api_key
 
     def api_url(self):
-        return "/".join((self.rhodecode_url(), "_admin/api"))
+        return normalised_url("/".join((self.rhodecode_url(), "_admin/api")))
 
     def request_data(self, method_name):
         return {'id' : self.next_request_id(), 'api_key': self.api_key(), 
